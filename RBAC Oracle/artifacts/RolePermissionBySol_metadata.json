@@ -1,0 +1,161 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "U_id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					}
+				],
+				"name": "S_table_add",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "U_id",
+						"type": "string"
+					}
+				],
+				"name": "del_U_id",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "U_id",
+						"type": "string"
+					}
+				],
+				"name": "getPer_idByU_id",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "U_id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					}
+				],
+				"name": "mod_Per_id",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "U_id",
+						"type": "string"
+					}
+				],
+				"name": "setBlance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/RBAC Oracle/storage.sol": "RolePermissionBySol"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/RBAC Oracle/storage.sol": {
+			"keccak256": "0xc497c3c390f4fcc3889d007553567584e0251ab0a490d4e3513aa25fc394bd5f",
+			"urls": [
+				"bzz-raw://5164c990b4b104e537a8b1b68eff25c908539b0e359342cd1397b29473e37b76",
+				"dweb:/ipfs/QmZJoKddkG6F7ZV4XyE6apioYdTxWizBTLBYbZgmtSveKZ"
+			]
+		}
+	},
+	"version": 1
+}

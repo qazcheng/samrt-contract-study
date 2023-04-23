@@ -1,0 +1,313 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "contract Storage",
+						"name": "addr1",
+						"type": "address"
+					},
+					{
+						"internalType": "contract Calculator",
+						"name": "addr2",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"name": "GetPer_idByR_idByDelegateCall",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"name": "table_addByDelegateCall",
+				"type": "event"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "PermissionID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "calculator",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					}
+				],
+				"name": "Table_addWithDelegateCall",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "c",
+				"outputs": [
+					{
+						"internalType": "contract Calculator",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "fileHash",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "fileName",
+						"type": "string"
+					}
+				],
+				"name": "getEvidence",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					}
+				],
+				"name": "getPer_idByR_id",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "calculator",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					}
+				],
+				"name": "getPer_idByR_idWithDelegateCall",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "fileName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					}
+				],
+				"name": "query",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "s",
+				"outputs": [
+					{
+						"internalType": "contract Storage",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "user",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/AccessControl/Machine.sol": "Machine"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/AccessControl/Calculator.sol": {
+			"keccak256": "0xb36aa900b189e7fea629bfdf7fe8c159d0ad977a47e7d958c019fe34691b3252",
+			"urls": [
+				"bzz-raw://b2d4ea3bcc15786bf1d16823ec94ad2e0e4a37894aefd3ad0c8a0709c3aae027",
+				"dweb:/ipfs/QmTMUBRBrBMKy6AfckV53wRXar5Gbzv6W4hHcFfeQx58bf"
+			]
+		},
+		"contracts/AccessControl/Machine.sol": {
+			"keccak256": "0x86f346092b10865523f77b32083fffcb4d8c9ddfe6446a92144ca6daab2241e1",
+			"urls": [
+				"bzz-raw://177dadf179b590947426831ea904ab051eb07843c9459eabbcfdc24826ff990d",
+				"dweb:/ipfs/QmYsHhArSr9hfsHr9xYcdQNjS3yCFQsB6Uxit7qeJE85hQ"
+			]
+		},
+		"contracts/AccessControl/Storage.sol": {
+			"keccak256": "0x594eabe3c17cb5390180c9a69e13ecca71b278a8de8be5fe8cac0714e1e162b1",
+			"urls": [
+				"bzz-raw://07a45f70796a0c66eb7111bb8f893c2d7e4c3058a2884bdb0a42c117ef7c0f54",
+				"dweb:/ipfs/QmVRBZgjaKLosWsabuywhx1mhgsdVf1jmUnRq9qFZNTD3E"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,218 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					}
+				],
+				"name": "Del_R_id",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					}
+				],
+				"name": "GetPer_idByR_id",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					}
+				],
+				"name": "Mod_Per_id",
+				"type": "event"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					}
+				],
+				"name": "Table_add",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					}
+				],
+				"name": "del_R_id",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					}
+				],
+				"name": "getPer_idByR_id",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					}
+				],
+				"name": "mod_Per_id",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "rt",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "R_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "user",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/AccessControl/Calculator.sol": "Calculator"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/AccessControl/Calculator.sol": {
+			"keccak256": "0xb36aa900b189e7fea629bfdf7fe8c159d0ad977a47e7d958c019fe34691b3252",
+			"urls": [
+				"bzz-raw://b2d4ea3bcc15786bf1d16823ec94ad2e0e4a37894aefd3ad0c8a0709c3aae027",
+				"dweb:/ipfs/QmTMUBRBrBMKy6AfckV53wRXar5Gbzv6W4hHcFfeQx58bf"
+			]
+		}
+	},
+	"version": 1
+}

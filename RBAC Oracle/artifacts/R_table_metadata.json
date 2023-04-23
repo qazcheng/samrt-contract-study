@@ -1,0 +1,113 @@
+{
+	"compiler": {
+		"version": "0.8.19+commit.7dd6d404"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "U_id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					}
+				],
+				"name": "S_table_add",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "U_id",
+						"type": "string"
+					}
+				],
+				"name": "del_U_id",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "U_id",
+						"type": "string"
+					}
+				],
+				"name": "getPer_idByU_id",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "U_id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Per_id",
+						"type": "uint256"
+					}
+				],
+				"name": "mod_Per_id",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/RBAC Oracle/RolePermission2.sol": "R_table"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/RBAC Oracle/RolePermission2.sol": {
+			"keccak256": "0x178d76d90daa50cd1ace1c47d5a1188ec1cb41cbb92f8c9248ae8301fbf8c385",
+			"urls": [
+				"bzz-raw://cbd076cdcad224365930a2fec3e6bf57dbac7b6a69d603e6adeae324658238f2",
+				"dweb:/ipfs/QmQEJsW96kHbcp5zwg5sAWhfvVJNy1BVWxa3HJCu2FBfeF"
+			]
+		}
+	},
+	"version": 1
+}
