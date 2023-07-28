@@ -1,0 +1,127 @@
+(* A Lightweight Dynamic ID-based Authenticated Key Agreement*) 
+(* This code is based on ''Abbasinezhad-Mood, Dariush, et al. 
+"Efficient provably-secure dynamic ID-based authenticated key agreement scheme with enhanced security provision." 
+IEEE Transactions on Dependable and Secure Computing (2020).'' *)
+
+(* Channel Definition *)
+(* free S_U_secure_net : channel [private].*) (* Secure channel between server and user *)
+free net : channel.           (* Public channel between A and B *)
+
+(* Private Terms *)
+free ID_A : bitstring [private]. (* User Aʹs identifier *)
+free ID_B : bitstring [private]. (* User Bʹs identifier *)
+(* free PWu : bitstring [private]. *) (* Userʹs password *)
+free SK : bitstring [private].  (* Shared session key *)
+(* free sk_A : bitstring [private].  (* Secret key of A *)
+free sk_B : bitstring [private].  (* Secret key of B *)   *)
+free x : bitstring [private].  (* Secret key of CA *)
+free r_A : bitstring [private].  (* Secret key of A *)
+free r_B : bitstring [private].  (* Secret key of B *)
+free r_CA_A : bitstring [private].  (* Secret key of CA for A *)
+free r_CA_B : bitstring [private].  (* Secret key of CA for B *)
+
+
+(* Public Terms *)
+const G : bitstring.  (* Base point *)
+
+(* Functions *)
+fun ConcatTwo(bitstring, bitstring) : bitstring. (* Cncatenation *)
+fun Enc(bitstring, bitstring) : bitstring. (* Symmetric encryption *)
+fun Hash1(bitstring) : bitstring. (* One‐input Hash *)
+fun Hash3(bitstring, bitstring, bitstring) : bitstring. (* Three‐input Hash *)
+fun Hash4(bitstring, bitstring, bitstring, bitstring) : bitstring. (* Four‐input Hash *)
+fun Hash5(bitstring, bitstring, bitstring, bitstring, bitstring) : bitstring. (* Five‐input Hash *)
+fun Hash6(bitstring, bitstring, bitstring, bitstring, bitstring, bitstring) : bitstring. (* Six‐input Hash *)
+fun Hash7(bitstring, bitstring, bitstring, bitstring, bitstring, bitstring, bitstring) :bitstring. (* Seven‐input Hash *)
+fun XOR(bitstring, bitstring) : bitstring. (* Exclusive OR *)
+fun ScalarMul(bitstring, bitstring) : bitstring. (* EC point multiplication *)
+fun Add(bitstring, bitstring) : bitstring. (* EC point Add *)
+
+
+(* Destructobs *)
+reduc forall m1 : bitstring, key : bitstring; Dec(Enc(m1, key), key) = m1. 
+reduc forall m1 : bitstring, m2 : bitstring; Separate1(ConcatTwo(m1, m2)) = m1.
+reduc forall m1 : bitstring, m2 : bitstring; Separate2(ConcatTwo(m1, m2)) = m2.
+reduc forall m1 : bitstring, m2 : bitstring; DXOR(XOR(m1, m2), m1) = m2.
+
+(* Equations *)
+equation forall m1 : bitstring, m2 : bitstring; XOR(m1, m2) = XOR(m2, m1).
+
+(* queries *)
+(* query attacker (new beta). *)   (* Uncomment when checking KSSTIA resistance *)
+(* query attacker (new alpha). *) (* Uncomment when checking KSSTIA resistance *)
+(*)
+query attacker (SK).             (* A query to check the secrecy of generated session key *)
+noninterf IDu.                   (* A query to check the strong anonymity of user *)
+weaksecret PWu.  (* A query to check the resistance against the offline password guessing attack *)
+query m1 : bitstring, m2 : bitstring, m3: bitstring, m4 : bitstring, m5 : bitstring; inj-event (Server_Accepts_Key (m1, m2, m3, m4, m5)) 
+==> inj-event (User_Requests_Authentication (m1, m2, m3, m4)).
+query m1 : bitstring, m2 : bitstring, m3: bitstring, m4 : bitstring, m5 : bitstring; inj-event (User_Accepts_Key (m1, m2, m3, m4, m5)) 
+==> inj-event (Server_Responds_User (m1, m2, m3)).
+*)
+
+(* Events *)
+event Server_Accepts_Key (bitstring, bitstring, bitstring, bitstring, bitstring).
+event User_Accepts_Key (bitstring, bitstring, bitstring, bitstring, bitstring).
+
+(* CA process *)
+let CA=
+(* CA Initialization *)
+let P_pub = ScalarMul(x, G) in
+let R_CA_A = ScalarMul(r_CA_A, G) in
+let R_CA_B = ScalarMul(r_CA_B, G) in
+out (net, (P_pub,R_CA_A,R_CA_B));
+in (net, (R_A))
+in (net, (R_B))
+(* User registration *)
+let Cert_A = ScalarMul(x, Hash2(ID_A, Add(R_A,R_CA_A))) in
+let e_A = Hash1(Cert_A) in
+let s_A = Add(ScalarMul(e_A, r_CA_A),x) in 
+let Cert_B = ScalarMul(x, Hash2(ID_B, Add(R_B,R_CA_B))) in
+let e_B = Hash1(Cert_B) in
+let s_B = Add(ScalarMul(e_B, r_CA_B),x) in 
+out (net, (Cert_A,Cert_B,e_A,e_B,s_A,s_B))
+0.
+
+
+(* UserB process *)
+let UB=
+(* UserA Registration *)
+let R_B = ScalarMul(r_B, G) in
+out (net, (R_B,ID_B));
+in (net, (Cert_B,s_B,R_CA_B))
+let d_A = Add(ScalarMul(Hash1(Cert_B),r_B),s_B) in
+let Q_A = ScalarMul(d_B, G) in
+new t_A : bitstring; (* Session ephemeral secret *)
+let T_A = ScalarMul(t_B, G) in
+out (net, (ID_B,Cert_B,T_B,Q_B))
+let KB_1 = ScalarMul(t_B,T_A) in
+let KB_2 = ScalarMul(d_B,Q_A) in
+let KB_3 = ScalarMul(Add(t_B,d_B),Add(T_A,Q_A)) in
+let sB_A = Hash5(ID_A,ID_B,KA_1,KA_2,KA_3) in
+event User_Accepts_Key (ID_A,ID_B,KB_1,KB_2,KB_3);
+0.
+
+(* UserA process *)
+let UA=
+(* UserA Registration *)
+let R_A = ScalarMul(r_A, G) in
+out (net, (R_A,ID_A));
+in (net, (Cert_A,s_A,R_CA_A))
+let d_A = Add(ScalarMul(Hash1(Cert_A),r_A),s_A) in
+let Q_A = ScalarMul(d_A, G) in
+new t_A : bitstring; (* Session ephemeral secret *)
+let T_A = ScalarMul(t_A, G) in
+out (net, (ID_A,Cert_A,T_A,Q_A))
+let KA_1 = ScalarMul(t_A,T_B) in
+let KA_2 = ScalarMul(d_A,Q_B) in
+let KA_3 = ScalarMul(Add(t_A,d_A),Add(T_B,Q_B)) in
+let sk_A = Hash5(ID_A,ID_B,KA_1,KA_2,KA_3) in
+event User_Accepts_Key (ID_A,ID_B,KA_1,KA_2,KA_3);
+0.
+
+
+process 
+  ((!t_A) | (!t_B))  (* Comment in case of the perfect forward secrecy check*)
+  (* ((!pS) | (!pU)| (phase 1 ; out (S_U_public_net, (sk, PWu, IDu)))) *) (* Uncomment to check the perfect forward secrecy *)
+
