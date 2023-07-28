@@ -28,6 +28,7 @@ const G : bitstring.  (* Base point *)
 fun ConcatTwo(bitstring, bitstring) : bitstring. (* Cncatenation *)
 fun Enc(bitstring, bitstring) : bitstring. (* Symmetric encryption *)
 fun Hash1(bitstring) : bitstring. (* One‐input Hash *)
+fun Hash2(bitstring, bitstring) : bitstring. (* Three‐input Hash *)
 fun Hash3(bitstring, bitstring, bitstring) : bitstring. (* Three‐input Hash *)
 fun Hash4(bitstring, bitstring, bitstring, bitstring) : bitstring. (* Four‐input Hash *)
 fun Hash5(bitstring, bitstring, bitstring, bitstring, bitstring) : bitstring. (* Five‐input Hash *)
@@ -61,8 +62,16 @@ query m1 : bitstring, m2 : bitstring, m3: bitstring, m4 : bitstring, m5 : bitstr
 *)
 
 (* Events *)
-event Server_Accepts_Key (bitstring, bitstring, bitstring, bitstring, bitstring).
-event User_Accepts_Key (bitstring, bitstring, bitstring, bitstring, bitstring).
+event AcceptsA(bitstring).
+event AcceptsB(bitstring, bitstring).
+event TermA(bitstring, bitstring).
+event TermB(bitstring).
+(*event Server_Accepts_Key (bitstring, bitstring, bitstring, bitstring, bitstring).
+event User_Accepts_Key (bitstring, bitstring, bitstring, bitstring, bitstring).  *)
+query x:bitstring,y:bitstring;event(TermA(x,y))==>event(AcceptsB(x,y)).
+query x:bitstring; inj-event(TermB(x))==>inj-event(AcceptsA(x)).
+
+
 
 (* CA process *)
 let CA=
@@ -71,8 +80,7 @@ let P_pub = ScalarMul(x, G) in
 let R_CA_A = ScalarMul(r_CA_A, G) in
 let R_CA_B = ScalarMul(r_CA_B, G) in
 out (net, (P_pub,R_CA_A,R_CA_B));
-in (net, (R_A))
-in (net, (R_B))
+in (net, (R_A,R_B))
 (* User registration *)
 let Cert_A = ScalarMul(x, Hash2(ID_A, Add(R_A,R_CA_A))) in
 let e_A = Hash1(Cert_A) in
@@ -89,7 +97,7 @@ let UB=
 (* UserA Registration *)
 let R_B = ScalarMul(r_B, G) in
 out (net, (R_B,ID_B));
-in (net, (Cert_B,s_B,R_CA_B))
+in (net, (Cert_B,s_,R_CA_B))
 let d_A = Add(ScalarMul(Hash1(Cert_B),r_B),s_B) in
 let Q_A = ScalarMul(d_B, G) in
 new t_A : bitstring; (* Session ephemeral secret *)
@@ -98,8 +106,9 @@ out (net, (ID_B,Cert_B,T_B,Q_B))
 let KB_1 = ScalarMul(t_B,T_A) in
 let KB_2 = ScalarMul(d_B,Q_A) in
 let KB_3 = ScalarMul(Add(t_B,d_B),Add(T_A,Q_A)) in
-let sB_A = Hash5(ID_A,ID_B,KA_1,KA_2,KA_3) in
-event User_Accepts_Key (ID_A,ID_B,KB_1,KB_2,KB_3);
+event AcceptsB(sk_B,Q_B);
+let sk_B = Hash5(ID_A,ID_B,KA_1,KA_2,KA_3) in
+event TermB (sk_B);
 0.
 
 (* UserA process *)
@@ -116,8 +125,9 @@ out (net, (ID_A,Cert_A,T_A,Q_A))
 let KA_1 = ScalarMul(t_A,T_B) in
 let KA_2 = ScalarMul(d_A,Q_B) in
 let KA_3 = ScalarMul(Add(t_A,d_A),Add(T_B,Q_B)) in
+event AcceptsA(sk_A);
 let sk_A = Hash5(ID_A,ID_B,KA_1,KA_2,KA_3) in
-event User_Accepts_Key (ID_A,ID_B,KA_1,KA_2,KA_3);
+event TermA (sk_A,Q_A);
 0.
 
 
