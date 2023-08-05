@@ -1,85 +1,85 @@
-%阶段函数1：CAStore(ID, EU , QA, QB , Ppub, PA, PB)
-% 定义函数 cAStore
+% Stage 1 Function：CAStore(ID, EU , QA, QB , Ppub, PA, PB)
+% Define Function cAStore
 :- use_module(library(clpfd)).
 cAStore(Id, EU, Ppub, RCAU) :-
-    % 检查 InforMap[id] 的 Storaged 属性是否为 true
+    % Check if the Storaged property of InforMap[id] is true.
     (inforMap(Id, Storaged), Storaged = true ->
-        % 如果为 true，返回 "Fail"
+        % If true, return "Fail".
         write('Fail')
     ;
-        % 否则，创建一个新的结构 Infor
-        % 设置 Infor.Ppub 为 Ppub
+        % Otherwise, create a new structure called Infor.
+        % Set Infor.Ppub to Ppub.
         assertz(infor_Ppub(Id, Ppub)),
         write(infor_Ppub(Id, Ppub)),nl,
-        % 设置 Infor.RCA^U 为 Rca^U
+        % Set Infor.RCA^U to Rca^U.
         assertz(infor_RCAU(Id, RCAU)),
         write(infor_RCAU(Id, RCAU)),nl,
-        % 设置 Infor.eU 为 EU
+        % Set Infor.eU to EU.
         assertz(infor_EU(Id, EU)),
         write(infor_EU(Id, EU)),nl,
-        % 设置 Infor.Storaged 为 true
+        % Set Infor.Storaged to true.
         assertz(infor(Id, true)),
         write(infor(Id, true)),nl,
-        % 更新 InforMap[id]
+        % Update InforMap[id].
         retract(inforMap(Id, _)),
         assertz(inforMap(Id, Infor)),
-        % 返回 "Success Store"
+        % Return "Success Store".
         write('Success Store')
     ).
 
-%定义函数 certVerifier(Id):
+% Define a function certVerifier(Id):
 certVerifier(Id) :-
-    % 检查 InforMap[id] 的 Storaged 属性是否不等于 true
+    % Check if the Storaged property of InforMap[id] is not equal to true.
     (inforMap(Id, Storaged), Storaged \= true ->
-        % 如果不等于 true，返回 "Fail"
+        % If not equal to true, return "Fail".
         write('Fail')
     ;
-        % 否则，验证等式并返回相应的结果
-        % 计算 eU * (RU + RCAU) + Ppub 的值
-        % 获取 eU 的值
+        % Otherwise, verify the equation and return the corresponding result.
+        % Calculate the value of eU * (RU + RCAU) + Ppub.
+        % Get the value of eU.
         infor_EU(Id, EU),
         Limit #> EU,
-        % 获取 RU 的值
+        % Get the value of RU.
         infor_RU(Id, RU),
         Limit #> RU,
-        % 获取 RCAU 的值
+        % Get the value of RCAU.
         infor_RCAU(Id, RCAU),
         Limit #> RCAU,
-        % 获取 Ppub 的值
+        % Get the value of Ppub.
         infor_Ppub(Id, Ppub),
         Limit #> Ppub,
-        % 计算 eU * (RU + RCAU) + Ppub 的结果
+        % Calculate the result of eU * (RU + RCAU) + Ppub.
         safe_plus(RU, RCAU, Result_1),
         safe_mult(EU, Result_1, Result_2),
         safe_plus(Result_2, Ppub, ExpressionResult),
-        %ExpressionResult is EU * (RU + RCAU) + Ppub,
-        % 获取 QU 的值
+        % ExpressionResult is EU * (RU + RCAU) + Ppub,
+        % Get the value of QU.
         infor_QU(Id, QU),
-        % 检查 eU * (RU + RCAU) + Ppub 是否等于 QU
+        % Check if eU * (RU + RCAU) + Ppub is equal to QU.
         (ExpressionResult =:= QU ->
-            % 如果相等，返回 true
+            % If they are equal, return true.
             write(true)
         ;
-            % 否则，返回 false
+            % Otherwise, return false.
             write(false)
         )
     ).
 
-% 自定义谓词，检查一个项是否为无符号整数
+% Custom predicate, check if an item is an unsigned integer.
 is_unsigned_integer(X) :-
-    integer(X),             % 检查是否为整数
-    X >= 0.                 % 大于等于 0
+    integer(X),             % Check if it is an integer.
+    X >= 0.                 % Greater than or equal to 0.
 
-% 自定义谓词，安全加法 (safe_plus)
+% Custom predicate, safe addition (safe_plus).
 safe_plus(A, B, Result) :-
     Sum is A + B,
     nat_ble(A, Sum, Check1),
     nat_ble(B, Sum, Check2),
     Check1, Check2,
     Result is Sum.
-safe_plus(_, _, error). % 结果溢出时返回错误
+safe_plus(_, _, error). % Return an error when the result overflows.
 
-% 自定义谓词，安全乘法 (safe_mult)
+% Custom predicate, safe multiplication (safe_mult).
 safe_mult(A, B, Result) :-
     A \= 0,
     Div is A * B / A,
@@ -88,12 +88,12 @@ safe_mult(A, B, Result) :-
         Result = error
     ).
 
-% 用于检查一个自然数是否小于等于另一个自然数
+% Used to check if one natural number is less than or equal to another natural number.
 nat_ble(Nat1, Nat2, true) :-
     Nat1 =< Nat2.
 nat_ble(_, _, false).
 
-% 用于检查两个自然数是否相等
+% Used to check if two natural numbers are equal.
 nat_beq(Nat1, Nat2, true) :-
     Nat1 =:= Nat2.
 nat_beq(_, _, false).
